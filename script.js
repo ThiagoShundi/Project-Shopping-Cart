@@ -49,12 +49,21 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
   return section;
 };
 
+const searches = async () => {
+  const local = document.querySelector('.items');
+  const search = await fetchProducts('computador');
+  search.results.forEach((pro) => {
+    const item = createProductItemElement(pro);
+    local.appendChild(item);
+  });
+};
+
 /**
  * Função que recupera o ID do produto passado como parâmetro.
  * @param {Element} product - Elemento do produto.
  * @returns {string} ID do produto.
  */
-const getIdFromProductItem = (product) => product.querySelector('span.id').innerText;
+const getIdFromProductItem = (product) => product.querySelector('span.item_id').innerText;
 
 /**
  * Função responsável por criar e retornar um item do carrinho.
@@ -73,5 +82,5 @@ const createCartItemElement = ({ id, title, price }) => {
 };
 
 window.onload = async () => {
-  console.log(await fetchProducts('computador'));
+  searches();
 };
