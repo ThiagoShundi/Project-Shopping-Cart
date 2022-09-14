@@ -52,9 +52,8 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
 const searches = async () => {
   const local = document.querySelector('.items');
   const search = await fetchProducts('computador');
-  search.results.forEach((pro) => {
-    const item = createProductItemElement(pro);
-    local.appendChild(item);
+  search.results.forEach((product) => {
+    local.appendChild(createProductItemElement(product));
   });
 };
 
@@ -77,10 +76,22 @@ const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
-  li.addEventListener('click', cartItemClickListener);
+  li.addEventListener('click', () => console.log('cartItemClickListener'));
   return li;
 };
 
+const adds = async () => {
+  const local = document.querySelectorAll('.item__add');
+    local.forEach((produto) => {
+      const products = getIdFromProductItem(produto.parentNode);
+      produto.addEventListener('click', async () => {
+        const cart = document.querySelector('.cart__items');
+        cart.appendChild(createCartItemElement(await fetchItem(products)));
+    });
+  });
+};
+
 window.onload = async () => {
-  searches();
+  await searches();
+  adds();
 };
