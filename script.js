@@ -75,12 +75,22 @@ const getIdFromProductItem = (product) => product.querySelector('span.item_id').
 
 // cartItemClickListener 
 
+const locals = () => document.querySelector('.cart__items');
+
+// const ClearButton = () => {
+//   const button = document.querySelector('.empty-cart');
+//   button.addEventListener('click', (event) => {
+//     const cartRemoveAll = document.querySelectorAll('.cart__items');
+//     cartRemoveAll.removeChild(event.target);
+//   }
+// };
+
 const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
   li.addEventListener('click', (event) => {
-    const cartRemove = document.querySelector('.cart__items');
+    const cartRemove = locals();
     cartRemove.removeChild(event.target);
   });
   return li;
@@ -91,8 +101,10 @@ const adds = async () => {
     local.forEach((produto) => {
       const products = getIdFromProductItem(produto.parentNode);
       produto.addEventListener('click', async () => {
-        const cart = document.querySelector('.cart__items');
+        const cart = locals();
         cart.appendChild(createCartItemElement(await fetchItem(products)));
+        const listaDeFavoristos = locals();
+        saveCartItems(listaDeFavoristos.innerHTML);
     });
   });
 };
@@ -100,4 +112,9 @@ const adds = async () => {
 window.onload = async () => {
   await searches();
   adds();
+  document.querySelector('.cart__items').innerHTML = getSavedCartItems();
+  const retornarValoresDoStorage = locals();
+  
+  // Fazer um querrySelectorALl para pegar todas as li
+  // fazer um laço de repetição e reatribuir os eventos.
 };
