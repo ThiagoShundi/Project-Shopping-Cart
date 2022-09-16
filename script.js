@@ -85,14 +85,17 @@ const locals = () => document.querySelector('.cart__items');
 //   }
 // };
 
+const cartItemClickListener = (event) => {
+  const cartRemove = locals();
+  cartRemove.removeChild(event.target);
+  saveCartItems(cartRemove.innerHTML);
+};
+
 const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
-  li.addEventListener('click', (event) => {
-    const cartRemove = locals();
-    cartRemove.removeChild(event.target);
-  });
+  li.addEventListener('click', (cartItemClickListener));
   return li;
 };
 
@@ -113,8 +116,8 @@ window.onload = async () => {
   await searches();
   adds();
   document.querySelector('.cart__items').innerHTML = getSavedCartItems();
-  const retornarValoresDoStorage = locals();
-  
-  // Fazer um querrySelectorALl para pegar todas as li
-  // fazer um laço de repetição e reatribuir os eventos.
+  const retornarValoresDoStorage = document.querySelectorAll('.cart__item');
+  retornarValoresDoStorage.forEach((storageProduct) => {
+    storageProduct.addEventListener('click', cartItemClickListener);
+  });
 };
