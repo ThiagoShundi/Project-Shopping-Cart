@@ -76,19 +76,23 @@ const getIdFromProductItem = (product) => product.querySelector('span.item_id').
 // cartItemClickListener 
 
 const locals = () => document.querySelector('.cart__items');
-
-// const ClearButton = () => {
-//   const button = document.querySelector('.empty-cart');
-//   button.addEventListener('click', (event) => {
-//     const cartRemoveAll = document.querySelectorAll('.cart__items');
-//     cartRemoveAll.removeChild(event.target);
-//   }
-// };
+const Mlocals = () => document.querySelectorAll('.cart__item');
 
 const cartItemClickListener = (event) => {
   const cartRemove = locals();
   cartRemove.removeChild(event.target);
   saveCartItems(cartRemove.innerHTML);
+};
+
+const ClearButton = () => {
+  const button = document.querySelector('.empty-cart');
+    button.addEventListener('click', () => {
+    const cartRemoveAll = Mlocals();
+    cartRemoveAll.forEach((clear) => {
+      clear.remove();
+    });
+    saveCartItems(locals().innerHTML);
+  });
 };
 
 const createCartItemElement = ({ id, title, price }) => {
@@ -115,9 +119,10 @@ const adds = async () => {
 window.onload = async () => {
   await searches();
   adds();
-  document.querySelector('.cart__items').innerHTML = getSavedCartItems();
-  const retornarValoresDoStorage = document.querySelectorAll('.cart__item');
+  locals().innerHTML = getSavedCartItems();
+  const retornarValoresDoStorage = Mlocals();
   retornarValoresDoStorage.forEach((storageProduct) => {
     storageProduct.addEventListener('click', cartItemClickListener);
   });
+  ClearButton();
 };
