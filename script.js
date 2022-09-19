@@ -116,8 +116,24 @@ const adds = async () => {
   });
 };
 
+const windownLoading = () => {
+  const local2 = document.querySelector('.container');
+  local2.appendChild(createCustomElement('p', 'loading', 'carregando...'));
+};
+
+const windownDestroy = () => {
+  const local2 = document.querySelector('.loading');
+  local2.remove();
+};
+
+// const somaTotal = async () => {
+//   console.log(createCartItemElement(await fetchItem('MLB1937076326')));
+// };
+
 window.onload = async () => {
+  windownLoading();
   await searches();
+  windownDestroy();
   adds();
   locals().innerHTML = getSavedCartItems();
   const retornarValoresDoStorage = Mlocals();
@@ -125,4 +141,5 @@ window.onload = async () => {
     storageProduct.addEventListener('click', cartItemClickListener);
   });
   ClearButton();
+  // somaTotal();
 };
