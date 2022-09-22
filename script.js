@@ -78,10 +78,26 @@ const getIdFromProductItem = (product) => product.querySelector('span.item_id').
 const locals = () => document.querySelector('.cart__items');
 const Mlocals = () => document.querySelectorAll('.cart__item');
 
+const somaTotal = () => {
+  const array = [];
+  const local = Mlocals();
+  const localTotalPrice = document.querySelector('.total-price');
+  let soma = 0;
+  local.forEach((produto) => {
+    const valorStr = produto.innerText.split('$')[1];
+    const valorInt = Number(valorStr);
+    array.push(valorInt);
+     soma = array.reduce((acc, curr) => acc + curr, 0);
+     soma = (Math.floor(soma * 100)) / 100;
+  });
+  localTotalPrice.innerText = soma;
+};
+
 const cartItemClickListener = (event) => {
   const cartRemove = locals();
   cartRemove.removeChild(event.target);
   saveCartItems(cartRemove.innerHTML);
+  somaTotal();
 };
 
 const ClearButton = () => {
@@ -92,6 +108,7 @@ const ClearButton = () => {
       clear.remove();
     });
     saveCartItems(locals().innerHTML);
+    somaTotal();
   });
 };
 
@@ -112,6 +129,7 @@ const adds = async () => {
         cart.appendChild(createCartItemElement(await fetchItem(products)));
         const listaDeFavoristos = locals();
         saveCartItems(listaDeFavoristos.innerHTML);
+        somaTotal();
     });
   });
 };
@@ -126,10 +144,6 @@ const windownDestroy = () => {
   local2.remove();
 };
 
-// const somaTotal = async () => {
-//   console.log(createCartItemElement(await fetchItem('MLB1937076326')));
-// };
-
 window.onload = async () => {
   windownLoading();
   await searches();
@@ -141,5 +155,5 @@ window.onload = async () => {
     storageProduct.addEventListener('click', cartItemClickListener);
   });
   ClearButton();
-  // somaTotal();
+  somaTotal();
 };
