@@ -1,21 +1,22 @@
-<h1> Carrinho de compras </h1>
+<h1> Shopping Cart </h1>
 
-<h2> Sobre o projeto </h2>
+<h2> About the project </h2>
 
 <div> 
-Este projeto foi desenvolvido no curso de front-end, com a proposta de utilizar as ferrasmentas de introdução ao front-end e JavaScript assíncrono.
+
+This project was developed in the front-end course, with the proposal to use the tools for introducing the front-end and asynchronous JavaScript.
 
 </div> 
 
-<h2> Avaliação do Projeto </h2>
+<h2> Project Evaluation </h2>
 
 <img src="images/avaliacao.png"/>
 
 <img src="images/projeto.png"/>
 
-<h2>Contato </h2>
+<h2>Contact </h2>
 
-<p> Para mais informações entre em contato: </p>
+<p> For more information contact us: </p>
 
 <div>
 <a href="https://www.linkedin.com/in/thiago-hayashi-037732109/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
