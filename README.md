@@ -8,9 +8,18 @@ This project was developed in the front-end course, with the proposal to use the
 
 </div> 
 
-<h2> Project Evaluation </h2>
+<h2> Skills </h2>
 
-<img src="images/avaliacao.png"/>
+<ul>
+
+<li>Use the React, HTML, CSS to create the pages;</li>
+<li>Use the Mercado Livre's API;</li>
+<li>Use the Test Driven Development;</li>
+<li>Use the JavaScript;</li>
+
+</ul>
+  
+<h2> Project Evaluation </h2>
 
 <img src="images/projeto.png"/>
 
